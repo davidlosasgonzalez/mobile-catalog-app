@@ -1,3 +1,6 @@
+/**
+ * Header de la app.
+ */
 export default function Header() {
     return (
         <header>
