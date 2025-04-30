@@ -1,3 +1,4 @@
+import React from 'react';
 import PhoneCardItem from './PhoneCardItem';
 import { Phone } from '@/types/phone.types';
 
