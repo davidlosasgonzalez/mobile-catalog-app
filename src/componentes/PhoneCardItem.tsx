@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import React from 'react';
 import { Phone } from '@/types/phone.types';
 
 const DEFAULT_IMAGE = '/default-phone-card.jpg';
