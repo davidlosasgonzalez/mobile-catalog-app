@@ -1,5 +1,5 @@
 /**
- * Tipo base de teléfono tal como lo devuelve la API.
+ * Tipo base de teléfono.
  */
 export type Phone = {
     id: string;
@@ -7,4 +7,13 @@ export type Phone = {
     name: string;
     basePrice: number;
     imageUrl: string;
+};
+
+/**
+ * Estado de la entidad de teléfonos en Redux.
+ */
+export type PhoneState = {
+    phones: Phone[];
+    loading: boolean;
+    error: string | null;
 };

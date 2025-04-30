@@ -1,48 +1,53 @@
 # Phone Catalog Challenge
 
-Aplicación web enfocada en la visualización, búsqueda y gestión de un catálogo de teléfonos móviles. Desarrollada como parte de una prueba técnica, priorizando estructura, funcionalidad y claridad de arquitectura.
+Aplicación web enfocada en la visualización, búsqueda y gestión de un catálogo de teléfonos móviles. Desarrollada como parte de una prueba técnica para Zara, priorizando estructura, funcionalidad, claridad de arquitectura y buenas prácticas de desarrollo profesional.
 
 ## Tecnologías utilizadas
 
 - Next.js
-- React
+- React 18
 - Redux Toolkit para gestión de estado
 - Axios para comunicación con la API
 - localStorage para persistencia del carrito
 - TypeScript para tipado estricto
-- ESLint + Prettier + Vitest + Testing Library (tests unitarios)
+- ESLint + Prettier (con reglas estrictas)
+- Vitest + Testing Library para tests unitarios
 
-## Funcionalidades implementadas (idea inicial)
+## Funcionalidades implementadas
 
 ### Día 1
 
-- Configuración de Next.js y Redux Toolkit
-- Petición a la API de teléfonos con autenticación `x-api-key`
-- Listado inicial de 20 teléfonos en cuadrícula
-- Vista principal (`/`) con componente reutilizable por tarjeta
-- Separación de tipos, servicios, redux y componentes
-- Tipado estricto con interfaces y types auxiliares
+- Configuración de Next.js, ESLint, Prettier y Redux Toolkit.
+- Conexión con la API externa usando `x-api-key`.
+- Listado inicial de teléfonos.
+- Componente reutilizable para cada tarjeta de teléfono.
+- Búsqueda en tiempo real por nombre o marca .
+- Separación de tipos, servicios, redux y componentes con tipado estricto.
 
 ### Día 2 (previsto)
 
-- Búsqueda por nombre o marca (vía API)
-- Navegación funcional con rutas dinámicas (`/phones/[id]`)
-- Detalle básico de un teléfono con nombre, marca, imagen y precio
-- Carrito funcional con Redux (añadir, eliminar, persistir en localStorage)
-- Vista de carrito: listado de productos, precio total y botón "continuar comprando"
-- Persistencia del carrito al refrescar página
-- Contador de productos en Header conectado al estado global
-- README completo con explicación técnica
-- Prueba unitaria básica (representativa)
+- Navegación dinámica con rutas (`/phones/[id]`).
+- Detalle completo del teléfono: selector de color y almacenamiento, actualización de imagen/precio, botón añadir al carrito.
+- Carrito persistente: añadir, eliminar, total calculado, contador en header.
+- Vista de carrito con productos seleccionados y botón "Continuar comprando".
+- Sección de productos similares en detalle.
+- Indicador del número de resultados de búsqueda.
+- Estilos.
 
-> El objetivo inicial es cubrir la lógica de negocio. El apartado visual se abordará una vez completadas las funcionalidades previstas.
+> Se prioriza el desarrollo de la lógica de negocio y arquitectura limpia. El diseño visual se abordará tras finalizar la funcionalidad clave.
 
-## Instalación y Configuración
+## Instalación y configuración
 
 ```bash
 git clone https://github.com/davidlosasgonzalez/mobile-catalog-app
 cd mobile-catalog-app
 npm install
+```
+
+### Modo desarrollo
+
+```bash
+npm run dev
 ```
 
 ## Testing
@@ -56,17 +61,7 @@ Vitest + Testing Library integrados. Tests disponibles:
 - Reducer `phoneSlice`
 - Componente `PhoneCardItem`
 - Componente `PhoneCardList`
-
-## Accesibilidad y estándares
-
-- Estructura semántica con HTML5 (`<header>`, `<main>`, `<section>`)
-- Linting con ESLint y Prettier configurados con reglas estrictas
-- Responsividad básica adaptada a pantallas móviles y escritorio
-- Tipografía base: `Helvetica, Arial, sans-serif`
-
-## 📚 Recursos
-
-- [API oficial](https://prueba-tecnica-api-tienda-moviles.onrender.com/docs/)
+- Componente `SearchBar`
 
 ## Autor
 
