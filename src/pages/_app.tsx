@@ -1,43 +1,26 @@
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import PhoneCard from '@/componentes/PhoneCard';
+import { Toaster } from 'react-hot-toast';
+import { Provider } from 'react-redux';
+import Header from '@/componentes/Header';
+import { store } from '@/redux/config/store';
 
-// TODO: cambiar por llamada a API.
-const mockPhones = [
-    {
-        name: 'iPhone 15',
-        brand: 'Apple',
-        price: '999€',
-        image: '/fake-img-1.jpg',
-    },
-    {
-        name: 'Galaxy S23',
-        brand: 'Samsung',
-        price: '899€',
-        image: '/fake-img-2.jpg',
-    },
-];
-
-export default function HomePage() {
+/**
+ * Componente principal que envuelve toda la aplicación.
+ */
+export default function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <>
+        <Provider store={store}>
             <Head>
-                <title>Catálogo de Teléfonos</title>
                 <meta
-                    name="description"
-                    content="Visualiza y gestiona teléfonos móviles"
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
                 />
             </Head>
 
-            <section>
-                <h2>Catálogo de Teléfonos</h2>
-                <p>Aquí se mostrará la lista de teléfonos disponibles.</p>
-
-                <div className="phone-grid">
-                    {mockPhones.map((phone, index) => (
-                        <PhoneCard key={index} {...phone} />
-                    ))}
-                </div>
-            </section>
-        </>
+            <Header />
+            <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
+            <Component {...pageProps} />
+        </Provider>
     );
 }
