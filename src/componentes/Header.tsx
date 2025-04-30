@@ -1,5 +1,5 @@
 /**
- * Header de la app.
+ * Renderiza el header principal.
  */
 export default function Header() {
     return (

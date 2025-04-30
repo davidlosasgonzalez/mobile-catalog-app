@@ -5,6 +5,9 @@ import { mockPhone } from '../../../test/__mocks__/phone.mock';
 import PhoneCardList from '../PhoneCardList';
 
 describe('PhoneCardList', () => {
+    /**
+     * Muestra un mensaje si la lista de teléfonos está vacía.
+     */
     it('muestra un mensaje si no hay teléfonos', () => {
         render(<PhoneCardList phones={[]} />);
         expect(
@@ -12,6 +15,9 @@ describe('PhoneCardList', () => {
         ).toBeInTheDocument();
     });
 
+    /**
+     * Renderiza una tarjeta por cada teléfono proporcionado.
+     */
     it('renderiza una lista de tarjetas de teléfono', () => {
         render(<PhoneCardList phones={[mockPhone, mockPhone]} />);
         const images = screen.getAllByRole('img');

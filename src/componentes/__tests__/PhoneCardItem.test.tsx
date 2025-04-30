@@ -7,6 +7,9 @@ import type { Phone } from '@/types/phone.types';
 import '@testing-library/jest-dom';
 
 describe('PhoneCardItem', () => {
+    /**
+     * Renderiza correctamente los datos del teléfono: marca, modelo, precio e imagen.
+     */
     it('renderiza nombre, marca, precio e imagen del teléfono', () => {
         render(<PhoneCardItem {...mockPhone} />);
 
@@ -21,6 +24,9 @@ describe('PhoneCardItem', () => {
         expect(screen.getByText(/precio base: 799/i)).toBeInTheDocument();
     });
 
+    /**
+     * Muestra una imagen por defecto si no se proporciona imageUrl.
+     */
     it('usa imagen por defecto si imageUrl está vacía', () => {
         const phoneWithNoImage: Phone = {
             ...mockPhone,

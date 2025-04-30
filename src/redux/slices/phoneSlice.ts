@@ -23,12 +23,14 @@ const initialState: PhoneState = {
 /**
  * Acción asíncrona para obtener los teléfonos desde la API.
  */
-export const fetchPhones = createAsyncThunk('phones/fetch', async () => {
-    const res = await apiClient.get<Phone[]>('/products');
+export const fetchPhones = createAsyncThunk(
+    'phones/fetch',
+    async (term: string = '') => {
+        const res = await apiClient.get<Phone[]>(`/products?search=${term}`);
 
-    return res.data;
-});
-
+        return res.data;
+    },
+);
 /**
  * Slice de Redux para manejar el estado del catálogo de teléfonos.
  */
