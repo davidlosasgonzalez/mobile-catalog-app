@@ -1,5 +1,6 @@
 import { apiClient } from './apiClient';
-import type { Phone, PhoneDetail } from '@/types/phone.types';
+import { PhoneDetail } from '@/types/phone/phone-detail.type';
+import { Phone } from '@/types/phone/phone.type';
 
 /**
  * Realiza una petición a la API para obtener el listado de teléfonos,
@@ -15,11 +16,11 @@ export async function getPhones(
     limit = 20,
     offset = 0,
 ): Promise<Phone[]> {
-    const response = await apiClient.get<Phone[]>(`/products`, {
+    const res = await apiClient.get<Phone[]>(`/products`, {
         params: { search, limit, offset },
     });
 
-    return response.data;
+    return res.data;
 }
 
 /**
@@ -29,7 +30,7 @@ export async function getPhones(
  * @returns Promesa que resuelve con los datos del teléfono
  */
 export async function getPhoneById(id: string): Promise<PhoneDetail> {
-    const response = await apiClient.get<PhoneDetail>(`/products/${id}`);
+    const res = await apiClient.get<PhoneDetail>(`/products/${id}`);
 
-    return response.data;
+    return res.data;
 }

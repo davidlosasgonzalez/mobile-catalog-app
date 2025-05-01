@@ -1,17 +1,13 @@
 import React from 'react';
 import PhoneCardItem from './PhoneCardItem';
-import { Phone } from '@/types/phone.types';
-
-type PhoneCardListProps = {
-    phones: Phone[];
-};
+import { IPhoneCardListProps } from '@/interfaces/phone/phone-card-list-props.interface';
 
 /**
  * Renderiza una lista de tarjetas de teléfonos.
  */
-export default function PhoneCardList({ phones }: PhoneCardListProps) {
+export default function PhoneCardList({ phones }: IPhoneCardListProps) {
     if (!phones.length) {
-        return <p>No hay teléfonos disponibles.</p>;
+        return <p>No phones available.</p>;
     } else {
         console.log(phones);
     }

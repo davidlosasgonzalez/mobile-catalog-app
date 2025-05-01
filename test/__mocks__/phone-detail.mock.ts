@@ -1,8 +1,5 @@
-import type { PhoneDetail } from '@/types/phone.types';
+import { PhoneDetail } from '@/types/phone/phone-detail.type';
 
-/**
- * Mock detallado para pruebas de la vista PhoneDetailPage.
- */
 export const mockPhoneDetail: PhoneDetail = {
     id: '123',
     brand: 'Samsung',

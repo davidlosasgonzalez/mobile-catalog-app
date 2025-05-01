@@ -7,14 +7,14 @@ export default function NotFoundPage() {
     return (
         <main>
             <Head>
-                <title>Página no encontrada</title>
+                <title>Page not found</title>
                 <meta name="robots" content="noindex" />
                 <meta
                     name="description"
                     content="La página que buscas no existe."
                 />
             </Head>
-            <h2>Página no encontrada: Error 404</h2>
+            <h2>Page not found: Error 404</h2>
         </main>
     );
 }

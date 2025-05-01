@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { Phone } from '@/types/phone.types';
+import { Phone } from '@/types/phone/phone.type';
 
 const DEFAULT_IMAGE = '/default-phone-card.jpg';
 
@@ -20,7 +20,7 @@ export default function PhoneCardItem({
             <article>
                 <Image
                     src={imageUrl ? imageUrl : DEFAULT_IMAGE}
-                    alt={`Imagen del modelo ${brand} ${name}`}
+                    alt={`${brand} ${name} model image`}
                     width={200}
                     height={300}
                     loading="lazy"
@@ -28,7 +28,7 @@ export default function PhoneCardItem({
                 <h3>
                     {brand} {name}
                 </h3>
-                <p>Precio base: {basePrice} €</p>
+                <p>Price: {basePrice} €</p>
             </article>
         </Link>
     );
