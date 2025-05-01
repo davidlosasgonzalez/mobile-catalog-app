@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { describe, it, vi, expect, beforeEach } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { createTestStore } from '../../../test/utils/createTestStore';
 import SearchBar from '../SearchBar';
 import type { AppDispatch } from '@/redux/config/store';
@@ -75,7 +75,11 @@ describe('SearchBar', () => {
 
         await waitFor(() => {
             expect(dispatch).toHaveBeenCalled();
-            expect(fetchPhones).toHaveBeenCalledWith('Samsung');
+            expect(fetchPhones).toHaveBeenCalledWith({
+                search: 'Samsung',
+                limit: 20,
+                offset: 0,
+            });
         });
     });
 });

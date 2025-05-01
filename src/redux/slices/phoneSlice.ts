@@ -1,15 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { apiClient } from '@/services/apiClient';
-import { Phone } from '@/types/phone.types';
-
-/**
- * Estado global para la gestión del catálogo de teléfonos.
- */
-type PhoneState = {
-    phones: Phone[];
-    loading: boolean;
-    error: string | null;
-};
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { getPhones } from '@/services/phoneService';
+import { FetchPhonesParams, Phone, PhoneState } from '@/types/phone.types';
 
 /**
  * Estado inicial del slice de teléfonos.
@@ -21,18 +12,23 @@ const initialState: PhoneState = {
 };
 
 /**
- * Acción asíncrona para obtener los teléfonos desde la API.
+ * Acción asíncrona para obtener teléfonos desde la API con filtros opcionales.
+ *
+ * @param params - Parámetros de búsqueda: término, límite y desplazamiento.
+ * @returns Lista de teléfonos que coinciden con los filtros.
  */
-export const fetchPhones = createAsyncThunk(
-    'phones/fetch',
-    async (term: string = '') => {
-        const res = await apiClient.get<Phone[]>(`/products?search=${term}`);
+export const fetchPhones = createAsyncThunk<
+    Phone[],
+    FetchPhonesParams | undefined
+>('phones/fetch', async (params = {}) => {
+    const { search = '', limit = 20, offset = 0 } = params;
 
-        return res.data;
-    },
-);
+    return await getPhones(search, limit, offset);
+});
+
 /**
- * Slice de Redux para manejar el estado del catálogo de teléfonos.
+ * Slice de Redux Toolkit para manejar el estado del catálogo de teléfonos.
+ * Incluye manejo de carga, éxito y error para la petición asíncrona `fetchPhones`.
  */
 const phoneSlice = createSlice({
     name: 'phones',
@@ -44,14 +40,17 @@ const phoneSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(fetchPhones.fulfilled, (state, action) => {
-                state.phones = action.payload;
-                state.loading = false;
-            })
+            .addCase(
+                fetchPhones.fulfilled,
+                (state, action: PayloadAction<Phone[]>) => {
+                    state.phones = action.payload;
+                    state.loading = false;
+                },
+            )
             .addCase(fetchPhones.rejected, (state, action) => {
                 state.loading = false;
                 state.error =
-                    action.error.message || 'Error al cargar productos';
+                    action.error.message ?? 'Error al cargar productos';
             });
     },
 });
