@@ -1,23 +1,32 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
 import PhoneCardList from '@/componentes/PhoneCardList';
 import SearchBar from '@/componentes/SearchBar';
 import type { RootState, AppDispatch } from '@/redux/config/store';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { fetchPhones } from '@/redux/slices/phoneSlice';
 
 /**
- * Página principal.
+ * Página principal que muestra el catálogo de teléfonos móviles.
+ * Carga los primeros resultados al montar el componente.
  */
 export default function HomePage() {
-    const dispatch: AppDispatch = useDispatch();
-    const { phones, loading, error } = useSelector(
+    const dispatch: AppDispatch = useAppDispatch();
+    const { phones, loading, error } = useAppSelector(
         (state: RootState) => state.phones,
     );
 
     useEffect(() => {
-        dispatch(fetchPhones('')).catch(() => {});
+        const fetchData = async () => {
+            try {
+                await dispatch(
+                    fetchPhones({ search: '', limit: 20, offset: 0 }),
+                ).unwrap();
+            } catch {}
+        };
+
+        void fetchData();
     }, [dispatch]);
 
     return (

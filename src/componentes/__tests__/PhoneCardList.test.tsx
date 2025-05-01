@@ -19,7 +19,9 @@ describe('PhoneCardList', () => {
      * Renderiza una tarjeta por cada teléfono proporcionado.
      */
     it('renderiza una lista de tarjetas de teléfono', () => {
-        render(<PhoneCardList phones={[mockPhone, mockPhone]} />);
+        render(
+            <PhoneCardList phones={[mockPhone, { ...mockPhone, id: '123' }]} />,
+        );
         const images = screen.getAllByRole('img');
 
         expect(images).toHaveLength(2);

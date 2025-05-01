@@ -12,6 +12,8 @@ type PhoneCardListProps = {
 export default function PhoneCardList({ phones }: PhoneCardListProps) {
     if (!phones.length) {
         return <p>No hay teléfonos disponibles.</p>;
+    } else {
+        console.log(phones);
     }
 
     return (

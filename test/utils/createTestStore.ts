@@ -3,15 +3,27 @@ import phonesReducer from '@/redux/slices/phoneSlice';
 import type { PhoneState } from '@/types/phone.types';
 
 /**
- * Crea una instancia de Redux Store para pruebas unitarias.
- *
- * @param preloadedState - Estado inicial opcional para inyectar en la store.
- * @returns Una store de prueba configurada con el reducer de teléfonos.
+ * Estado inicial explícito del slice, usado para garantizar tipado correcto en tests.
  */
-export const createTestStore = (preloadedState?: { phones: PhoneState }) => {
+const initialPhonesState: PhoneState = {
+    phones: [],
+    loading: false,
+    error: null,
+};
+
+/**
+ * Crea una store de Redux configurada para pruebas unitarias.
+ *
+ * @param preloadedState - Estado parcial inicial para pruebas (solo phones).
+ * @returns Store lista para testear lógica redux.
+ */
+export const createTestStore = (
+    preloadedState: Partial<{ phones: PhoneState }> = {},
+) => {
     return configureStore({
         reducer: {
-            phones: phonesReducer,
+            phones: (state: PhoneState | undefined, action): PhoneState =>
+                phonesReducer(state ?? initialPhonesState, action),
         },
         preloadedState,
     });
