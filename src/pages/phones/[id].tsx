@@ -2,16 +2,22 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
-import PhoneCardItem from '@/componentes/PhoneCardItem';
+import PhoneCardItem from '@/componentes/PhoneCard/PhoneCardItem';
+import PhoneColorSelector from '@/componentes/PhoneDetail/PhoneColorSelector';
+import PhoneStorageSelector from '@/componentes/PhoneDetail/PhoneStorageSelector';
+import type { AppDispatch } from '@/redux/config/store';
+import { addToCart } from '@/redux/slices/cartSlice';
 import { getPhoneById } from '@/services/phoneService';
-import type { PhoneDetail } from '@/types/phone.types';
+import type { PhoneDetail } from '@/types/phone/phone-detail.type';
 
 const DEFAULT_IMAGE = '/default-phone-card.jpg';
 
 /**
  * Página de detalle para un teléfono específico.
- * Permite seleccionar color y almacenamiento con cambios dinámicos de imagen y precio.
+ * Muestra información del producto, permite seleccionar color y almacenamiento,
+ * y muestra una lista de productos similares.
  */
 export default function PhoneDetailPage() {
     const router = useRouter();
@@ -19,6 +25,26 @@ export default function PhoneDetailPage() {
     const [phone, setPhone] = useState<PhoneDetail | null>(null);
     const [selectedColor, setSelectedColor] = useState<string | null>(null);
     const [selectedStorage, setSelectedStorage] = useState<string | null>(null);
+    const dispatch: AppDispatch = useDispatch();
+
+    const handleAddToCart = () => {
+        if (!selectedColor || !selectedStorage || !phone) return;
+
+        dispatch(
+            addToCart({
+                id: phone.id,
+                brand: phone.brand,
+                name: phone.name,
+                imageUrl: currentImage,
+                color: selectedColor,
+                storage: selectedStorage,
+                price: currentPrice,
+                quantity: 1,
+            }),
+        );
+
+        void router.push('/cart');
+    };
 
     useEffect(() => {
         const fetchPhone = async () => {
@@ -52,10 +78,10 @@ export default function PhoneDetailPage() {
     return (
         <main>
             <Head>
-                <title>{`${phone.brand} ${phone.name} - Catálogo de Teléfonos`}</title>
+                <title>{`${phone.brand} ${phone.name} - Phone Details`}</title>
                 <meta
                     name="description"
-                    content={`${phone.brand} ${phone.name}: características, precios y opciones disponibles.`}
+                    content={`${phone.brand} ${phone.name}: features, prices and options available.`}
                 />
             </Head>
 
@@ -65,48 +91,42 @@ export default function PhoneDetailPage() {
 
             <Image
                 src={currentImage}
-                alt={`Imagen del modelo ${phone.brand} ${phone.name}`}
+                alt={`${phone.brand} ${phone.name} model image`}
                 width={300}
                 height={400}
                 loading="lazy"
             />
 
-            <p>Precio: {currentPrice} €</p>
+            <p>Price: {currentPrice} €</p>
 
-            <section>
-                <h3>Color:</h3>
-                <div>
-                    {phone.colorOptions.map((color) => (
-                        <button
-                            key={color.name}
-                            onClick={() => setSelectedColor(color.name)}
-                            aria-label={color.name}
-                            title={color.name}
-                        />
-                    ))}
-                </div>
-            </section>
+            <PhoneColorSelector
+                options={phone.colorOptions}
+                onSelect={setSelectedColor}
+            />
 
-            <section>
-                <h3>Almacenamiento:</h3>
-                <select
-                    value={selectedStorage ?? ''}
-                    onChange={(e) => setSelectedStorage(e.target.value)}
-                >
-                    {phone.storageOptions.map((opt) => (
-                        <option key={opt.capacity} value={opt.capacity}>
-                            {opt.capacity}
-                        </option>
-                    ))}
-                </select>
-            </section>
+            <PhoneStorageSelector
+                options={phone.storageOptions}
+                selected={selectedStorage}
+                onSelect={setSelectedStorage}
+            />
+
+            <button
+                onClick={handleAddToCart}
+                disabled={!selectedColor || !selectedStorage}
+            >
+                Añadir al carrito
+            </button>
 
             <section>
                 <h2>Productos similares</h2>
                 <div>
-                    {phone.similarProducts.map((product) => (
-                        <PhoneCardItem key={product.id} {...product} />
-                    ))}
+                    {phone.similarProducts.length > 0 ? (
+                        phone.similarProducts.map((product) => (
+                            <PhoneCardItem key={product.id} {...product} />
+                        ))
+                    ) : (
+                        <p>No similar products available.</p>
+                    )}
                 </div>
             </section>
         </main>

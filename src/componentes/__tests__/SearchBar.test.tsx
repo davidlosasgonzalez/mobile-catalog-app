@@ -24,9 +24,6 @@ describe('SearchBar', () => {
     let store: ReturnType<typeof createTestStore>;
     let dispatch: AppDispatch;
 
-    /**
-     * Crea un store de prueba antes de cada test y mockea dispatch.
-     */
     beforeEach(() => {
         store = createTestStore({
             phones: {
@@ -40,9 +37,6 @@ describe('SearchBar', () => {
         store.dispatch = dispatch;
     });
 
-    /**
-     * Verifica que el input de búsqueda se renderiza correctamente.
-     */
     it('renderiza el campo de búsqueda', () => {
         render(
             <Provider store={store}>
@@ -57,9 +51,6 @@ describe('SearchBar', () => {
         expect(input).toBeInTheDocument();
     });
 
-    /**
-     * Verifica que al escribir en el input se dispare la acción fetchPhones.
-     */
     it('dispara la acción fetchPhones al escribir', async () => {
         render(
             <Provider store={store}>

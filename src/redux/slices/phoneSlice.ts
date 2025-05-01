@@ -1,10 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { getPhones } from '@/services/phoneService';
-import { FetchPhonesParams, Phone, PhoneState } from '@/types/phone.types';
+import { FetchPhonesParams } from '@/types/phone/fetch-phones-params.type';
+import { PhoneState } from '@/types/phone/phone-state.type';
+import { Phone } from '@/types/phone/phone.type';
 
-/**
- * Estado inicial del slice de teléfonos.
- */
 const initialState: PhoneState = {
     phones: [],
     loading: false,
@@ -26,10 +25,6 @@ export const fetchPhones = createAsyncThunk<
     return await getPhones(search, limit, offset);
 });
 
-/**
- * Slice de Redux Toolkit para manejar el estado del catálogo de teléfonos.
- * Incluye manejo de carga, éxito y error para la petición asíncrona `fetchPhones`.
- */
 const phoneSlice = createSlice({
     name: 'phones',
     initialState,
@@ -40,6 +35,7 @@ const phoneSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
+
             .addCase(
                 fetchPhones.fulfilled,
                 (state, action: PayloadAction<Phone[]>) => {
@@ -47,6 +43,7 @@ const phoneSlice = createSlice({
                     state.loading = false;
                 },
             )
+
             .addCase(fetchPhones.rejected, (state, action) => {
                 state.loading = false;
                 state.error =

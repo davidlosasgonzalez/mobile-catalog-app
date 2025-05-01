@@ -6,35 +6,40 @@ Aplicación web enfocada en la visualización, búsqueda y gestión de un catál
 
 - Next.js
 - React 18
-- Redux Toolkit para gestión de estado
-- Axios para comunicación con la API
+- Redux Toolkit para gestión de estado (justificado frente a Context API por escalabilidad)
+- Axios para comunicación con la API autenticada
 - localStorage para persistencia del carrito
 - TypeScript para tipado estricto
 - ESLint + Prettier (con reglas estrictas)
 - Vitest + Testing Library para tests unitarios
 
-## Funcionalidades implementadas
+## Funcionalidades
 
-### Día 1
+### Vista principal (Listado de Teléfonos)
 
-- Configuración de Next.js, ESLint, Prettier y Redux Toolkit.
-- Conexión con la API externa usando `x-api-key`.
-- Listado inicial de teléfonos.
-- Componente reutilizable para cada tarjeta de teléfono.
-- Búsqueda en tiempo real por nombre o marca .
-- Separación de tipos, servicios, redux y componentes con tipado estricto.
+- Cuadrícula con tarjetas (`PhoneCardList`) mostrando imagen, nombre, marca y precio base.
+- Búsqueda en tiempo real (API) por nombre o marca.
+- Estado persistente del carrito vía `localStorage`.
+- ⚠ Indicador con el número de resultados encontrados.
+- ⚠ Barra de navegación con iconos: Inicio y Carrito.
 
-### Día 2 (previsto)
+### Vista de Detalle (`PhoneDetailPage`)
 
-- Navegación dinámica con rutas (`/phones/[id]`).
-- Detalle completo del teléfono: selector de color y almacenamiento, actualización de imagen/precio, botón añadir al carrito.
-- Carrito persistente: añadir, eliminar, total calculado, contador en header.
-- Vista de carrito con productos seleccionados y botón "Continuar comprando".
-- Sección de productos similares en detalle.
-- Indicador del número de resultados de búsqueda.
-- Estilos.
+- Imagen grande dinámica por color.
+- Selectores de almacenamiento y color.
+- Actualización en tiempo real del precio.
+- Botón "Añadir al carrito" activado solo si hay selección válida.
+- Sección de productos similares.
+- ⚠ Visualización de especificaciones técnicas completas.
 
-> Se prioriza el desarrollo de la lógica de negocio y arquitectura limpia. El diseño visual se abordará tras finalizar la funcionalidad clave.
+### Vista de Carrito (`CartPage`)
+
+- Teléfonos añadidos con imagen, nombre, color/almacenamiento y precio individual.
+- Eliminación individual de productos.
+- Precio total calculado.
+- Botón "Continuar comprando".
+
+> Se priorizó la arquitectura limpia, separación modular por dominio (Redux slices, servicios, tipos), y cobertura funcional completa. La capa de estilos se aborda en la siguiente fase.
 
 ## Instalación y configuración
 
@@ -44,13 +49,20 @@ cd mobile-catalog-app
 npm install
 ```
 
-### Modo desarrollo
+A continuación, copia el archivo `.env.local.example`, renómbralo como `.env.local` y completa las siguientes variables:
+
+```env
+NEXT_PUBLIC_API_URL=
+NEXT_PUBLIC_API_KEY=
+```
+
+Una vez listo puedes ejecutar el modo desarrollo con el siguiente comando:
 
 ```bash
 npm run dev
 ```
 
-## Testing
+Para ejecutar los test:
 
 ```bash
 npm run test
@@ -58,10 +70,21 @@ npm run test
 
 Vitest + Testing Library integrados. Tests disponibles:
 
-- Reducer `phoneSlice`
-- Componente `PhoneCardItem`
-- Componente `PhoneCardList`
-- Componente `SearchBar`
+- `phoneSlice.test.ts`
+- `cartSlice.test.ts`
+- `PhoneCardItem.test.tsx`
+- `PhoneCardList.test.tsx`
+- `PhoneDetailPage.test.tsx`
+- `SearchBar.test.tsx`
+- `CartPage.test.tsx`
+
+## Consideraciones técnicas
+
+- La API requiere autenticación con header `x-api-key`.
+- Uso de Redux frente a Context API justificado por claridad y escalabilidad.
+- Tipado estricto en todas las capas.
+- Navegación vía rutas dinámicas (`/phones/[id]`).
+- Sin errores en consola.
 
 ## Autor
 

@@ -1,10 +1,7 @@
-import { Phone } from '@/types/phone.types';
+import { Phone } from '@/types/phone/phone.type';
 
-/**
- * Mock básico reutilizable para objetos tipo Phone.
- */
 export const mockPhone: Phone = {
-    id: '123',
+    id: '1',
     brand: 'Samsung',
     name: 'Galaxy S23',
     basePrice: 799,

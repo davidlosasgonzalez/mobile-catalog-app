@@ -1,14 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
+import { Provider } from 'react-redux';
 import { vi, describe, it, expect } from 'vitest';
 import { mockPhoneDetail } from '../../../test/__mocks__/phone-detail.mock';
+import { createTestStore } from '../../../test/utils/createTestStore';
 import PhoneDetailPage from '@/pages/phones/[id]';
 import { getPhoneById } from '@/services/phoneService';
 
 vi.mock('next/router', () => ({
-    useRouter: () => ({
-        query: { id: '123' },
-    }),
+    useRouter: () => ({ query: { id: '123' }, push: vi.fn() }),
 }));
 
 vi.mock('@/services/phoneService', () => ({
@@ -16,18 +16,21 @@ vi.mock('@/services/phoneService', () => ({
 }));
 
 describe('PhoneDetailPage', () => {
-    /**
-     * Renderiza correctamente la información del teléfono cuando se carga desde la API.
-     */
-    it('renderiza datos del teléfono correctamente', async () => {
+    it('renderiza datos del teléfono y opciones correctamente', async () => {
         (getPhoneById as any).mockResolvedValue(mockPhoneDetail);
 
-        render(<PhoneDetailPage />);
+        const store = createTestStore();
+
+        render(
+            <Provider store={store}>
+                <PhoneDetailPage />
+            </Provider>,
+        );
 
         await waitFor(() => {
             expect(
                 screen.getByRole('img', {
-                    name: /imagen del modelo samsung galaxy s23/i,
+                    name: /samsung galaxy s23 model image/i,
                 }),
             ).toBeInTheDocument();
 
@@ -39,7 +42,7 @@ describe('PhoneDetailPage', () => {
 
             expect(
                 screen.getByText(
-                    (text) => text.includes('Precio') && text.includes('799'),
+                    (text) => text.includes('Price') && text.includes('799'),
                 ),
             ).toBeInTheDocument();
         });

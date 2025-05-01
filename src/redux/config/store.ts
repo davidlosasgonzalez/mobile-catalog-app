@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from '../slices/cartSlice';
 import phoneReducer from '../slices/phoneSlice';
 
 /**
@@ -7,6 +8,7 @@ import phoneReducer from '../slices/phoneSlice';
 export const store = configureStore({
     reducer: {
         phones: phoneReducer,
+        cart: cartReducer,
     },
 });
 

@@ -7,12 +7,12 @@ import { useAppDispatch } from '@/redux/hooks';
 import { fetchPhones } from '@/redux/slices/phoneSlice';
 
 /**
- * Barra de búsqueda con debounce.
- * Permite buscar teléfonos por nombre o marca, disparando la acción Redux `fetchPhones`.
+ * Barra de búsqueda: permite buscar teléfonos por nombre o marca.
  */
 export default function SearchBar() {
     const dispatch: AppDispatch = useAppDispatch();
     const [query, setQuery] = useState('');
+
     const debouncedFetch = useMemo(
         () =>
             debounce((term: string) => {
@@ -22,13 +22,14 @@ export default function SearchBar() {
                         const msg =
                             err instanceof Error
                                 ? err.message
-                                : 'Error desconocido';
+                                : 'Unknown error';
 
                         toast.error(msg);
                     });
             }, 500),
         [dispatch],
     );
+
     const handleChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value;

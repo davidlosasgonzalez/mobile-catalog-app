@@ -2,25 +2,17 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { describe, it, expect } from 'vitest';
 import { mockPhone } from '../../../test/__mocks__/phone.mock';
-import PhoneCardList from '../PhoneCardList';
+import PhoneCardList from '../PhoneCard/PhoneCardList';
 
 describe('PhoneCardList', () => {
-    /**
-     * Muestra un mensaje si la lista de teléfonos está vacía.
-     */
     it('muestra un mensaje si no hay teléfonos', () => {
         render(<PhoneCardList phones={[]} />);
-        expect(
-            screen.getByText(/no hay teléfonos disponibles/i),
-        ).toBeInTheDocument();
+        expect(screen.getByText(/no phones available/i)).toBeInTheDocument();
     });
 
-    /**
-     * Renderiza una tarjeta por cada teléfono proporcionado.
-     */
     it('renderiza una lista de tarjetas de teléfono', () => {
         render(
-            <PhoneCardList phones={[mockPhone, { ...mockPhone, id: '123' }]} />,
+            <PhoneCardList phones={[mockPhone, { ...mockPhone, id: '2' }]} />,
         );
         const images = screen.getAllByRole('img');
 
