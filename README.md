@@ -1,6 +1,8 @@
 # 📱 Phone Catalog Challenge
 
-Aplicación web enfocada en la visualización, búsqueda y gestión de un catálogo de teléfonos móviles. Desarrollada como parte de una prueba técnica para Zara, priorizando estructura clara, arquitectura escalable, buenas prácticas y cobertura funcional completa.
+Aplicación web enfocada en la visualización, búsqueda y gestión de un catálogo de teléfonos móviles. Estructura clara, arquitectura escalable, buenas prácticas y cobertura funcional completa.
+
+- [Deploy en Vercel](https://mobile-catalog-app-5lz2.vercel.app/)
 
 ## 🛠️ Tecnologías utilizadas
 
