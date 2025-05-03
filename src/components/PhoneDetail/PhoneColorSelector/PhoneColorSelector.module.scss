@@ -1,0 +1,36 @@
+@import '@/styles/variables';
+
+.color-selector {
+    margin-bottom: $spacing-lg;
+
+    &__title {
+        margin-bottom: $spacing-md;
+        font-size: $font-size-small;
+        text-transform: uppercase;
+    }
+
+    &__options {
+        display: flex;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-sm;
+    }
+
+    &__option {
+        width: 30px;
+        height: 30px;
+        border: 3px double $color-border-light-gray;
+        cursor: pointer;
+        background-clip: padding-box;
+        position: relative;
+
+        &--selected {
+            border-color: $color-text-primary;
+        }
+    }
+
+    &__name {
+        text-transform: capitalize;
+        font-size: $font-size-small;
+        margin-bottom: $spacing-sm;
+    }
+}

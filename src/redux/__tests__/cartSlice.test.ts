@@ -1,11 +1,15 @@
 import { UnknownAction } from '@reduxjs/toolkit';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { mockCartItem } from '../../../test/__mocks__/cart-item.mock';
 import cartReducer, {
     addToCart,
-    removeFromCart,
     clearCart,
+    decreaseQuantity,
+    increaseQuantity,
+    removeFromCart,
 } from '../slices/cartSlice';
+
 import { CartState } from '@/types/cart/cart-state.type';
 
 const initialState: CartState = {
@@ -67,6 +71,57 @@ describe('cartSlice', () => {
             ],
         };
         const newState = cartReducer(stateWithItems, clearCart());
+
+        expect(newState.items).toHaveLength(0);
+    });
+
+    it('should increase quantity of an existing item', () => {
+        const state: CartState = {
+            items: [{ ...mockCartItem, quantity: 2 }],
+        };
+
+        const newState = cartReducer(
+            state,
+            increaseQuantity({
+                id: mockCartItem.id,
+                color: mockCartItem.color,
+                storage: mockCartItem.storage,
+            }),
+        );
+
+        expect(newState.items[0].quantity).toBe(3);
+    });
+
+    it('should decrease quantity if greater than 1', () => {
+        const state: CartState = {
+            items: [{ ...mockCartItem, quantity: 2 }],
+        };
+
+        const newState = cartReducer(
+            state,
+            decreaseQuantity({
+                id: mockCartItem.id,
+                color: mockCartItem.color,
+                storage: mockCartItem.storage,
+            }),
+        );
+
+        expect(newState.items[0].quantity).toBe(1);
+    });
+
+    it('should remove item if quantity becomes 0', () => {
+        const state: CartState = {
+            items: [{ ...mockCartItem, quantity: 1 }],
+        };
+
+        const newState = cartReducer(
+            state,
+            decreaseQuantity({
+                id: mockCartItem.id,
+                color: mockCartItem.color,
+                storage: mockCartItem.storage,
+            }),
+        );
 
         expect(newState.items).toHaveLength(0);
     });

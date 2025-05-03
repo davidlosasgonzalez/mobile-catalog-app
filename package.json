@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@reduxjs/toolkit": "^2.7.0",
+        "@vitejs/plugin-react": "^4.4.1",
         "axios": "^1.9.0",
         "lodash.debounce": "^4.0.8",
         "next": "15.3.1",
@@ -18,23 +19,24 @@
         "react-dom": "^19.0.0",
         "react-hot-toast": "^2.5.2",
         "react-redux": "^9.2.0",
-        "react-spinners": "^0.17.0"
+        "react-spinners": "^0.17.0",
+        "sass": "^1.87.0",
+        "sharp": "^0.34.1"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
+        "@testing-library/dom": "^10.4.0",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.3.0",
         "@types/lodash.debounce": "^4.0.9",
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
-        "@types/redux-mock-store": "^1.5.0",
         "@vitest/ui": "^3.1.2",
         "eslint": "^9",
         "eslint-config-next": "15.3.1",
         "jsdom": "^26.1.0",
         "prettier": "^3.5.3",
-        "redux-mock-store": "^1.5.5",
         "typescript": "^5",
         "vitest": "^3.1.2"
     }

@@ -1,0 +1,95 @@
+@import '@/styles/variables';
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+
+    &__title {
+        margin-bottom: $spacing-lg-xl;
+    }
+
+    &__empty {
+        font-size: $font-size-base;
+    }
+
+    &__items {
+        flex-grow: 1;
+    }
+
+    &__summary {
+        display: grid;
+        gap: $spacing-sm;
+        grid-template-areas:
+            'total total'
+            'continue pay';
+        grid-template-columns: 1fr 1fr;
+        margin-top: $spacing-xl;
+
+        @media (min-width: $breakpoint-tablet) {
+            grid-template-areas: 'continue total pay';
+            grid-template-columns: 250px 1fr 250px;
+        }
+
+        [data-area='pay'] {
+            grid-area: pay;
+            justify-self: end;
+        }
+
+        [data-area='continue'] {
+            grid-area: continue;
+            justify-self: start;
+        }
+
+        [data-area='total'] {
+            grid-area: total;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: $font-size-small;
+            text-transform: uppercase;
+            display: flex;
+            gap: $spacing-xs;
+            margin-bottom: $spacing-sm;
+
+            @media (min-width: $breakpoint-tablet) {
+                justify-content: end;
+                gap: $spacing-md;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__button {
+        padding: $spacing-md $spacing-sm;
+        text-transform: uppercase;
+        font-size: $font-size-small;
+        font-weight: lighter;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s ease all;
+        width: 100%;
+
+        &--outline {
+            background-color: $color-white;
+            color: $color-text-primary;
+            border: 1px solid $color-text-primary;
+        }
+
+        &--filled {
+            background-color: $color-black;
+            color: $color-white;
+        }
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        @media (min-width: $breakpoint-tablet) {
+            justify-content: end;
+            gap: $spacing-md;
+            width: 200px;
+        }
+    }
+}

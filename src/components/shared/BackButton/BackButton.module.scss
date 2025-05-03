@@ -1,0 +1,15 @@
+@import '@/styles/variables';
+
+.back {
+    display: flex;
+    align-items: center;
+    margin: $spacing-lg 0;
+    color: inherit;
+    text-decoration: none;
+    font-size: $font-size-small;
+    text-transform: uppercase;
+}
+
+.icon {
+    margin-right: $spacing-sm;
+}
