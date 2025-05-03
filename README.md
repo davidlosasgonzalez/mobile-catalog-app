@@ -2,6 +2,8 @@
 
 Aplicación web enfocada en la visualización, búsqueda y gestión de un catálogo de teléfonos móviles. Desarrollada como parte de una prueba técnica para Zara, priorizando estructura clara, arquitectura escalable, buenas prácticas y cobertura funcional completa.
 
+- [Deploy en Vercel](https://mobile-catalog-app-5lz2.vercel.app/)
+
 ## 🛠️ Tecnologías utilizadas
 
 - **Next.js 15.3.1** — Framework de React con soporte para SSR/ISR y rutas dinámicas.
