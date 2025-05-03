@@ -1,9 +1,10 @@
-import Header from '@/components/shared/Header/Header';
-import { store } from '@/redux/config/store';
 import '@/styles/globals.scss';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
+
+import Header from '@/components/shared/Header/Header';
+import { store } from '@/redux/config/store';
 
 /**
  * Componente principal que envuelve toda la aplicación.

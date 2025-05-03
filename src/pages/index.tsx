@@ -1,10 +1,12 @@
+import Head from 'next/head';
+import { ClipLoader } from 'react-spinners';
+
+import styles from './index.module.scss';
+
 import SearchBar from '@/components/SearchBar/SearchBar';
 import PhoneCardList from '@/components/shared/PhoneCard/PhoneCardList/PhoneCardList';
 import { useCachedPhones } from '@/hooks/useCachedPhones';
 import { useAppSelector } from '@/redux/hooks';
-import Head from 'next/head';
-import { ClipLoader } from 'react-spinners';
-import styles from './index.module.scss';
 
 /**
  * Página principal que muestra el catálogo de teléfonos móviles.

@@ -1,5 +1,6 @@
-import { PhoneDetailProps } from '@/interfaces/phone/phone-details-props.interdace';
 import styles from './PhoneSpecifications.module.scss';
+
+import { PhoneDetailProps } from '@/interfaces/phone/phone-details-props.interdace';
 
 /**
  * Muestra una tabla con las especificaciones técnicas del teléfono.
