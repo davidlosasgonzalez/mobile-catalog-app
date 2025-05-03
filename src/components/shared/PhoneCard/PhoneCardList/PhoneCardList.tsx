@@ -1,6 +1,8 @@
-import { IPhoneCardListProps } from '@/interfaces/phone/phone-card-list-props.interface';
 import PhoneCardItem from '../PhoneCardItem/PhoneCardItem';
+
 import styles from './PhoneCardList.module.scss';
+
+import { IPhoneCardListProps } from '@/interfaces/phone/phone-card-list-props.interface';
 
 /**
  * Lista de tarjetas de teléfonos renderizadas en una cuadrícula.

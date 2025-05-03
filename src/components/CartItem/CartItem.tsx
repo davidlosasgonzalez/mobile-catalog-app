@@ -1,6 +1,8 @@
-import { ICartItemProps } from '@/interfaces/card/cart-item-props.interface';
 import Image from 'next/image';
+
 import styles from './CartItem.module.scss';
+
+import { ICartItemProps } from '@/interfaces/card/cart-item-props.interface';
 
 /**
  * Componente visual para representar un producto dentro del carrito.

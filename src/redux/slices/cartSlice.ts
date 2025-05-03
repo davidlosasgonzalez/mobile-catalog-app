@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { CartItemIdentifier } from '@/types/cart/cart-item-identifier.type';
 import { CartItem } from '@/types/cart/cart-item.type';
 import { CartState } from '@/types/cart/cart-state.type';

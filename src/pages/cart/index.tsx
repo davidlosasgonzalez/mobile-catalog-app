@@ -1,17 +1,18 @@
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import styles from './CartPage.module.scss';
+
 import CartItem from '@/components/CartItem/CartItem';
+import BackHomeButton from '@/components/shared/BackButton/BackButton';
 import { AppDispatch, RootState } from '@/redux/config/store';
 import {
     decreaseQuantity,
     increaseQuantity,
     removeFromCart,
 } from '@/redux/slices/cartSlice';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import BackHomeButton from '@/components/shared/BackButton/BackButton';
-import styles from './CartPage.module.scss';
 
 /**
  * Página del carrito de compras.
