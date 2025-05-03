@@ -1,7 +1,9 @@
-import { Phone } from '@/types/phone/phone.type';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import styles from './PhoneCardItem.module.scss';
+
+import { Phone } from '@/types/phone/phone.type';
 
 const DEFAULT_IMAGE = '/default-phone-card.jpg';
 

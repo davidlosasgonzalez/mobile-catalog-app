@@ -1,9 +1,11 @@
-import { RootState } from '@/redux/config/store';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+
 import styles from './Header.module.scss';
+
+import { RootState } from '@/redux/config/store';
 
 /**
  * Encabezado principal de la aplicación.

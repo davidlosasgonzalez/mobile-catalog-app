@@ -1,8 +1,9 @@
+import { useEffect, useMemo } from 'react';
+
 import { useAppDispatch } from '@/redux/hooks';
 import { fetchPhones, loadCachedPhones } from '@/redux/slices/phoneSlice';
 import { CachedPhones } from '@/types/phone/cached-phones.type';
 import { isCacheValid } from '@/utils/isCacheValid';
-import { useEffect, useMemo } from 'react';
 
 /**
  * Hook que carga teléfonos desde caché si está disponible y lanza una petición de fondo.
