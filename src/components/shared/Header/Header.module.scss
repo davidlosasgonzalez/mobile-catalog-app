@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoWrapper {
+    position: relative;
+    width: 80px;
+    aspect-ratio: 3 / 1;
+}
+.logo {
+    object-fit: contain;
+}
+
+.cartButton {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+}
+
+.cartIcon {
+    width: 18px;
+    height: 18px;
+}
+
+.badge {
+    color: black;
+}

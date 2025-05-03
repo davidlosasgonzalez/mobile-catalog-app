@@ -1,0 +1,42 @@
+@import '@/styles/variables';
+
+.specs {
+    margin-top: $spacing-xl;
+
+    &__title {
+        font-size: $font-size-heading;
+        margin-bottom: $spacing-lg-xl;
+    }
+
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    &__row {
+        border-top: 1px solid $color-border-light-gray-dark;
+
+        &:last-child {
+            border-bottom: 1px solid $color-border-light-gray-dark;
+        }
+    }
+
+    &__cell,
+    &__cell--label {
+        font-size: $font-size-base;
+        padding: $spacing-md 0;
+        vertical-align: top;
+    }
+
+    &__cell--label {
+        width: 40%;
+        font-weight: lighter;
+        text-transform: uppercase;
+        color: $color-text-primary;
+        text-align: left;
+    }
+
+    &__cell {
+        color: $color-text-secondary;
+    }
+}

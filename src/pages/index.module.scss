@@ -1,0 +1,27 @@
+@import '@/styles/variables';
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    width: 100%;
+    animation: fadeIn 0.3s ease-in;
+
+    &__spinner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $spacing-sm;
+        color: $color-text-secondary;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

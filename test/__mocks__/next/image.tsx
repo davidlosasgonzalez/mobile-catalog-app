@@ -1,4 +1,4 @@
-import React from 'react';
+import { ImgHTMLAttributes } from 'react';
 
 /**
  * Mock simplificado de next/image para entorno de test. Este mock permite que
@@ -7,7 +7,7 @@ import React from 'react';
  * @param props - Atributos de una imagen estándar HTML.
  * @returns Un elemento <img> con las propiedades proporcionadas.
  */
-const NextImage = (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
+const NextImage = (props: ImgHTMLAttributes<HTMLImageElement>) => {
     return <img {...props} />;
 };
 

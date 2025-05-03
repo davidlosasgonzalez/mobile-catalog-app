@@ -1,34 +1,21 @@
+import SearchBar from '@/components/SearchBar/SearchBar';
+import PhoneCardList from '@/components/shared/PhoneCard/PhoneCardList/PhoneCardList';
+import { useCachedPhones } from '@/hooks/useCachedPhones';
+import { useAppSelector } from '@/redux/hooks';
 import Head from 'next/head';
-import { useEffect } from 'react';
 import { ClipLoader } from 'react-spinners';
-import PhoneCardList from '@/componentes/PhoneCard/PhoneCardList';
-import SearchBar from '@/componentes/SearchBar';
-import type { RootState, AppDispatch } from '@/redux/config/store';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { fetchPhones } from '@/redux/slices/phoneSlice';
+import styles from './index.module.scss';
 
 /**
  * Página principal que muestra el catálogo de teléfonos móviles.
  */
 export default function HomePage() {
-    const dispatch: AppDispatch = useAppDispatch();
-    const phoneState = useAppSelector((state) => state.phones);
-    const { phones, loading, error } = phoneState;
+    useCachedPhones();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await dispatch(
-                    fetchPhones({ search: '', limit: 20, offset: 0 }),
-                ).unwrap();
-            } catch {}
-        };
-
-        void fetchData();
-    }, [dispatch]);
+    const { phones, loading, error } = useAppSelector((state) => state.phones);
 
     return (
-        <main>
+        <main className={styles.homePage}>
             <Head>
                 <title>Telephone Catalogue</title>
                 <meta
@@ -37,11 +24,19 @@ export default function HomePage() {
                 />
             </Head>
 
-            <section>
-                <h2>Telephone Catalogue</h2>
+            <section className={styles.phoneCatalog}>
                 <SearchBar />
                 {loading ? (
-                    <ClipLoader size={40} color="#333" speedMultiplier={1} />
+                    <div className={styles.loader}>
+                        <div className={styles['loader__spinner']}>
+                            <ClipLoader
+                                size={40}
+                                color="#333"
+                                speedMultiplier={1}
+                            />
+                            <span>Loading phones...</span>
+                        </div>
+                    </div>
                 ) : error ? (
                     <p>{error}</p>
                 ) : (
