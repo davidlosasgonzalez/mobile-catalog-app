@@ -1,4 +1,5 @@
 import { configureStore, UnknownAction } from '@reduxjs/toolkit';
+
 import cartReducer from '@/redux/slices/cartSlice';
 import phonesReducer from '@/redux/slices/phoneSlice';
 import { CartState } from '@/types/cart/cart-state.type';

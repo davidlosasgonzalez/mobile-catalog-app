@@ -1,4 +1,10 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import {
+    createSlice,
+    createAsyncThunk,
+    PayloadAction,
+    createAction,
+} from '@reduxjs/toolkit';
+
 import { getPhones } from '@/services/phoneService';
 import { FetchPhonesParams } from '@/types/phone/fetch-phones-params.type';
 import { PhoneState } from '@/types/phone/phone-state.type';
@@ -11,10 +17,12 @@ const initialState: PhoneState = {
 };
 
 /**
- * Acción asíncrona para obtener teléfonos desde la API con filtros opcionales.
- *
- * @param params - Parámetros de búsqueda: término, límite y desplazamiento.
- * @returns Lista de teléfonos que coinciden con los filtros.
+ * Acción local para cargar teléfonos desde el caché sin mostrar loading.
+ */
+export const loadCachedPhones = createAction<Phone[]>('phones/loadCache');
+
+/**
+ * Acción asíncrona para obtener teléfonos desde la API.
  */
 export const fetchPhones = createAsyncThunk<
     Phone[],
@@ -22,7 +30,24 @@ export const fetchPhones = createAsyncThunk<
 >('phones/fetch', async (params = {}) => {
     const { search = '', limit = 20, offset = 0 } = params;
 
-    return await getPhones(search, limit, offset);
+    const rawPhones = await getPhones(search, limit, offset);
+
+    const phones = Array.from(
+        new Map(rawPhones.map((phone) => [phone.id, phone])).values(),
+    );
+
+    if (phones.length > 0) {
+        localStorage.setItem(
+            'cachedPhones',
+            JSON.stringify({
+                phones,
+                timestamp: new Date().toISOString(),
+                lastSearch: search,
+            }),
+        );
+    }
+
+    return phones;
 });
 
 const phoneSlice = createSlice({
@@ -35,7 +60,6 @@ const phoneSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-
             .addCase(
                 fetchPhones.fulfilled,
                 (state, action: PayloadAction<Phone[]>) => {
@@ -43,12 +67,19 @@ const phoneSlice = createSlice({
                     state.loading = false;
                 },
             )
-
             .addCase(fetchPhones.rejected, (state, action) => {
                 state.loading = false;
                 state.error =
                     action.error.message ?? 'Error al cargar productos';
-            });
+            })
+            .addCase(
+                loadCachedPhones,
+                (state, action: PayloadAction<Phone[]>) => {
+                    state.phones = action.payload;
+                    state.loading = false;
+                    state.error = null;
+                },
+            );
     },
 });
 

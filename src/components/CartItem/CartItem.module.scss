@@ -1,0 +1,82 @@
+@import '@/styles/variables';
+
+.cart-item {
+    display: flex;
+    gap: $spacing-md;
+    padding: $spacing-md;
+
+    &__image-wrapper {
+        flex-shrink: 0;
+    }
+
+    &__image {
+        object-fit: contain;
+        width: 90%;
+        height: 90%;
+    }
+
+    &__info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__name {
+        font-size: $font-size-base;
+        font-weight: 600;
+    }
+
+    &__details {
+        font-size: $font-size-small;
+        color: $color-text-secondary;
+    }
+
+    &__price {
+        font-weight: bold;
+        margin-top: $spacing-sm;
+    }
+
+    &__controls {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        margin-top: $spacing-sm;
+    }
+
+    &__button {
+        padding: 0.2rem 0.6rem;
+        font-size: 1rem;
+        border: 1px solid $color-border-light-gray;
+        background-color: $color-white;
+        cursor: pointer;
+
+        &:disabled {
+            background-color: #f0f0f0;
+            color: #999;
+            border-color: $color-border-light-gray;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+    }
+
+    &__quantity {
+        min-width: 1.5rem;
+        text-align: center;
+    }
+
+    &__remove {
+        margin-top: $spacing-md;
+        background: none;
+        color: $color-red;
+        border: none;
+        cursor: pointer;
+        font-size: $font-size-small;
+        text-align: left;
+        padding: 0;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

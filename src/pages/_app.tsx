@@ -1,9 +1,9 @@
-import type { AppProps } from 'next/app';
-import Head from 'next/head';
-import { Toaster } from 'react-hot-toast';
-import { Provider } from 'react-redux';
-import Header from '@/componentes/Header';
+import Header from '@/components/shared/Header/Header';
 import { store } from '@/redux/config/store';
+import '@/styles/globals.scss';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import { Provider } from 'react-redux';
 
 /**
  * Componente principal que envuelve toda la aplicación.
@@ -19,7 +19,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             </Head>
 
             <Header />
-            <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
+
             <Component {...pageProps} />
         </Provider>
     );

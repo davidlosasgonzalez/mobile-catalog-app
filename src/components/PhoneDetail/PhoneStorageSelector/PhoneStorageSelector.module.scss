@@ -1,0 +1,30 @@
+@import '@/styles/variables';
+
+.storage-selector {
+    margin-bottom: $spacing-lg;
+
+    &__title {
+        margin-bottom: $spacing-md;
+        font-size: $font-size-small;
+        text-transform: uppercase;
+    }
+
+    &__option {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+        background-color: $color-white;
+        border: 1px solid $color-border-light-gray;
+        cursor: pointer;
+        transition: border-color 0.2s;
+        width: 100px;
+
+        &--selected {
+            border: 2px solid $color-border-light-gray-dark;
+        }
+
+        @media (min-width: $breakpoint-tablet) {
+            padding-top: 1rem;
+            padding-left: 1rem;
+        }
+    }
+}
