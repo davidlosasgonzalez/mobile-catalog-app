@@ -2,7 +2,7 @@
 
 Aplicación web enfocada en la visualización, búsqueda y gestión de un catálogo de teléfonos móviles. Estructura clara, arquitectura escalable, buenas prácticas y cobertura funcional completa.
 
-- [Deploy en Vercel](https://mobile-catalog-app-5lz2.vercel.app/)
+- [Deploy en Vercel](https://mobile-catalog-app-zik9.vercel.app/)
 
 ## 🛠️ Tecnologías utilizadas
 
