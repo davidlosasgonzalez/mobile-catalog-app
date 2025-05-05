@@ -18,9 +18,9 @@ export default function PhoneCardList({ phones }: IPhoneCardListProps) {
 
     return (
         <ul className={styles['phone-list']}>
-            {phones.map((phone) => (
+            {phones.map((phone, i) => (
                 <li key={phone.id} className={styles['phone-list__item']}>
-                    <PhoneCardItem {...phone} />
+                    <PhoneCardItem {...phone} priority={i === 0} />
                 </li>
             ))}
         </ul>

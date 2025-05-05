@@ -67,7 +67,7 @@ export default function PhoneDetailPage() {
         return (
             <div className={styles['phone-detail__loader']}>
                 <div className={styles['phone-detail__loader-spinner']}>
-                    <ClipLoader size={40} color="#333" speedMultiplier={1} />
+                    <ClipLoader size={40} color="#333333" speedMultiplier={1} />
                     <span>Loading phone details...</span>
                 </div>
             </div>
