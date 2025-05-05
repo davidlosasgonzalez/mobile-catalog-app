@@ -28,6 +28,7 @@ export default function Header() {
                     src="/logo-app.png"
                     alt="Mobile Catalog Logo"
                     fill
+                    sizes="80px"
                     className={styles.logo}
                     priority
                 />

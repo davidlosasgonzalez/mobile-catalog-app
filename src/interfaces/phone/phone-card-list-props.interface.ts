@@ -1,5 +1,5 @@
 import { Phone } from '@/types/phone/phone.type';
 
-export type IPhoneCardListProps = {
+export interface IPhoneCardListProps {
     phones: Phone[];
-};
+}

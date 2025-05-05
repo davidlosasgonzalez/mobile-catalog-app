@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from './PhoneCardItem.module.scss';
 
 import { Phone } from '@/types/phone/phone.type';
+import { PhoneCardItemProps } from '@/types/phone/phone-card-item-props.type';
 
 const DEFAULT_IMAGE = '/default-phone-card.jpg';
 
@@ -15,6 +16,7 @@ const DEFAULT_IMAGE = '/default-phone-card.jpg';
  * @param name - Nombre o modelo del teléfono
  * @param basePrice - Precio base del dispositivo
  * @param imageUrl - URL de la imagen del teléfono (se usa una por defecto si está vacía)
+ * @param priority - Si se debe priorizar la carga de la imagen (mejora el LCP si es la primera imagen visible)
  */
 export default function PhoneCardItem({
     id,
@@ -22,7 +24,8 @@ export default function PhoneCardItem({
     name,
     basePrice,
     imageUrl,
-}: Phone) {
+    priority,
+}: PhoneCardItemProps) {
     return (
         <Link href={`/phones/${id}`} className={styles['phone-card__link']}>
             <article className={styles['phone-card']}>
@@ -33,7 +36,9 @@ export default function PhoneCardItem({
                         width={240}
                         height={240}
                         className={styles['phone-card__image']}
-                        loading="lazy"
+                        {...(priority
+                            ? { priority: true }
+                            : { loading: 'lazy' })}
                     />
                 </div>
                 <div className={styles['phone-card__content']}>
