@@ -2,7 +2,7 @@ import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import { WebStorage } from 'redux-persist/lib/types';
 
 /**
- * Crea un almacenamiento vacío para el servidor (noop storage).
+ * Create an empty storage for the server (noop storage).
  */
 const createNoopStorage = (): WebStorage => ({
     getItem: (_key: string) => Promise.resolve(null),
@@ -11,7 +11,7 @@ const createNoopStorage = (): WebStorage => ({
 });
 
 /**
- * Crea un almacenamiento local en el navegador o un almacenamiento vacío en el servidor (SSR).
+ * Create a local storage in the browser or an empty storage on the server (SSR).
  */
 export const storage =
     typeof window !== 'undefined'

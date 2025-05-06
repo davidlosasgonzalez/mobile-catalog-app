@@ -32,18 +32,18 @@ const baseConfig = {
         'react-hooks': eslintPluginReactHooks,
     },
     rules: {
-        // TypeScript
+        // TypeScript.
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-floating-promises': 'warn',
         '@typescript-eslint/no-unsafe-argument': 'warn',
 
-        // React
+        // React.
         'react/jsx-uses-react': 'off',
         'react/react-in-jsx-scope': 'off',
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
 
-        // Import order (sin borrar)
+        // Import order.
         'import/order': [
             'error',
             {
@@ -64,7 +64,7 @@ const baseConfig = {
         ],
         'import/newline-after-import': ['error', { count: 1 }],
 
-        // Espaciado entre bloques lógicos
+        // Spacing between blocks.
         'padding-line-between-statements': [
             'error',
             {

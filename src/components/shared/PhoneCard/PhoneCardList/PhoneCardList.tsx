@@ -5,14 +5,18 @@ import styles from './PhoneCardList.module.scss';
 import { IPhoneCardListProps } from '@/interfaces/phone/phone-card-list-props.interface';
 
 /**
- * Lista de tarjetas de teléfonos renderizadas en una cuadrícula.
- *
- * @param phones - Array de teléfonos a mostrar en la lista
+ * Renders a list of phone cards in a grid layout.
  */
 export default function PhoneCardList({ phones }: IPhoneCardListProps) {
     if (!phones.length) {
         return (
-            <p className={styles['phone-list__empty']}>No phones available.</p>
+            <p
+                className={styles['phone-list__empty']}
+                role="status"
+                aria-live="polite"
+            >
+                No phones available.
+            </p>
         );
     }
 

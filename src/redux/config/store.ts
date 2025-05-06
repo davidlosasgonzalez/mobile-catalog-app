@@ -1,13 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
-import persistConfig from './persistConfig';
-import cartReducer from '../slices/cartSlice';
-import phoneReducer from '../slices/phoneSlice';
+import { PersistConfig } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-const persistedPhoneReducer = persistReducer(persistConfig, phoneReducer);
+import cartReducer from '../slices/cartSlice';
+import phoneReducer, { PhoneState } from '../slices/phoneSlice';
+
+// Define y tipa el persistConfig para evitar el error
+const persistConfig: PersistConfig<PhoneState> = {
+    key: 'phones',
+    storage,
+};
+
+const persistedPhoneReducer = persistReducer<PhoneState>(
+    persistConfig,
+    phoneReducer,
+);
 
 /**
- * Configuración principal del Redux Store.
+ * Main configuration of the Redux Store.
  */
 export const store = configureStore({
     reducer: {
@@ -21,16 +32,16 @@ export const store = configureStore({
 });
 
 /**
- * Tipo del estado global de la aplicación.
+ * Type of the global status of the application.
  */
 export type RootState = ReturnType<typeof store.getState>;
 
 /**
- * Tipo para el dispatch de la aplicación.
+ * Type for the dispatch of the application.
  */
 export type AppDispatch = typeof store.dispatch;
 
 /**
- * Persistor que permite la sincronización de redux-persist.
+ * Persistor enabling redux-persist synchronisation.
  */
 export const persistor = persistStore(store);

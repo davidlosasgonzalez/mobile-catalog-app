@@ -17,12 +17,12 @@ const initialState: PhoneState = {
 };
 
 /**
- * Acción local para cargar teléfonos desde el caché sin mostrar loading.
+ * Local action to load phones from cache without showing loading state.
  */
 export const loadCachedPhones = createAction<Phone[]>('phones/loadCache');
 
 /**
- * Acción asíncrona para obtener teléfonos desde la API.
+ * Async thunk to fetch phones from the API.
  */
 export const fetchPhones = createAsyncThunk<
     Phone[],
@@ -50,7 +50,7 @@ export const fetchPhones = createAsyncThunk<
     return phones;
 });
 
-const phoneSlice = createSlice({
+export const phoneSlice = createSlice({
     name: 'phones',
     initialState,
     reducers: {},
@@ -69,8 +69,7 @@ const phoneSlice = createSlice({
             )
             .addCase(fetchPhones.rejected, (state, action) => {
                 state.loading = false;
-                state.error =
-                    action.error.message ?? 'Error al cargar productos';
+                state.error = action.error.message ?? 'Failed to fetch phones';
             })
             .addCase(
                 loadCachedPhones,
@@ -83,4 +82,5 @@ const phoneSlice = createSlice({
     },
 });
 
+export type { PhoneState };
 export default phoneSlice.reducer;

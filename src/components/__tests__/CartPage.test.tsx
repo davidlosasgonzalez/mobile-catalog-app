@@ -41,7 +41,7 @@ describe('CartPage', () => {
                 brand: 'Samsung',
                 name: 'Galaxy A15',
                 imageUrl: 'https://example.com/a15.jpg',
-                color: 'Negro',
+                color: 'Black',
                 storage: '128 GB',
                 price: 199,
                 quantity: 1,
@@ -49,7 +49,7 @@ describe('CartPage', () => {
         ],
     };
 
-    it('muestra los ítems del carrito y calcula el total', () => {
+    it('renders cart items and calculates the total', () => {
         const store = createTestStore({ cart: defaultState });
 
         render(
@@ -69,7 +69,7 @@ describe('CartPage', () => {
         ).toBeInTheDocument();
     });
 
-    it('muestra un mensaje si el carrito está vacío', () => {
+    it('shows an empty cart message if no items are present', () => {
         const store = createTestStore({ cart: { items: [] } });
 
         render(
@@ -81,7 +81,7 @@ describe('CartPage', () => {
         expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
     });
 
-    it('permite aumentar y disminuir la cantidad de un producto', () => {
+    it('allows increasing and decreasing the quantity of a product', () => {
         const initialState: CartState = {
             items: [
                 {
@@ -100,28 +100,34 @@ describe('CartPage', () => {
             </Provider>,
         );
 
-        const increaseButton = screen.getByRole('button', { name: '+' });
+        const increaseButton = screen.getByRole('button', {
+            name: /increase quantity/i,
+        });
         fireEvent.click(increaseButton);
+
         expect(dispatchSpy).toHaveBeenCalledWith(
             increaseQuantity({
                 id: 'abc',
-                color: 'Negro',
+                color: 'Black',
                 storage: '128 GB',
             }),
         );
 
-        const decreaseButton = screen.getByRole('button', { name: '-' });
+        const decreaseButton = screen.getByRole('button', {
+            name: /decrease quantity/i,
+        });
         fireEvent.click(decreaseButton);
+
         expect(dispatchSpy).toHaveBeenCalledWith(
             decreaseQuantity({
                 id: 'abc',
-                color: 'Negro',
+                color: 'Black',
                 storage: '128 GB',
             }),
         );
     });
 
-    it('desactiva el botón "-" si la cantidad es 1', () => {
+    it('disables the "-" button when quantity is 1', () => {
         const store = createTestStore({ cart: defaultState });
 
         render(
@@ -130,11 +136,13 @@ describe('CartPage', () => {
             </Provider>,
         );
 
-        const decrementButton = screen.getByRole('button', { name: '-' });
+        const decrementButton = screen.getByRole('button', {
+            name: /decrease quantity/i,
+        });
         expect(decrementButton).toBeDisabled();
     });
 
-    it('permite eliminar un producto del carrito', () => {
+    it('allows removing a product from the cart', () => {
         const store = createTestStore({ cart: defaultState });
         store.dispatch = vi.fn();
 
@@ -149,7 +157,7 @@ describe('CartPage', () => {
         expect(store.dispatch).toHaveBeenCalled();
         expect(removeFromCart).toHaveBeenCalledWith({
             id: 'abc',
-            color: 'Negro',
+            color: 'Black',
             storage: '128 GB',
         });
     });
