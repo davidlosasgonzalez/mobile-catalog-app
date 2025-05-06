@@ -7,10 +7,12 @@ import SearchBar from '../SearchBar/SearchBar';
 
 import { fetchPhones } from '@/redux/slices/phoneSlice';
 
+// Mock lodash debounce to call the function immediately
 vi.mock('lodash.debounce', () => ({
     default: (fn: any) => fn,
 }));
 
+// Mock phoneSlice with spy on fetchPhones
 vi.mock('@/redux/slices/phoneSlice', async () => {
     const actual = await vi.importActual<any>('@/redux/slices/phoneSlice');
 
@@ -32,11 +34,11 @@ describe('SearchBar', () => {
             },
         });
 
-        // Reinicia mock entre tests
+        // Reset mocks before each test
         vi.clearAllMocks();
     });
 
-    it('renderiza el campo de búsqueda', () => {
+    it('renders the search input', () => {
         render(
             <Provider store={store}>
                 <SearchBar />
@@ -49,7 +51,7 @@ describe('SearchBar', () => {
         expect(input).toBeInTheDocument();
     });
 
-    it('dispara la acción fetchPhones al escribir', async () => {
+    it('dispatches fetchPhones when typing in the search bar', async () => {
         render(
             <Provider store={store}>
                 <SearchBar />

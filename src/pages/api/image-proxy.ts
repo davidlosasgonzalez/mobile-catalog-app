@@ -3,10 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import sharp from 'sharp';
 
 /**
- * API Route que actúa como proxy de imágenes:
- * - Descarga la imagen desde una URL remota.
- * - Recorta márgenes blancos automáticamente usando `sharp.trim()`.
- * - Devuelve la imagen optimizada en formato WebP.
+ * API Route that acts as an image proxy:
+ * - Downloads the image from a remote URL.
+ * - Trim white margins automatically using `sharp.trim()`.
+ * - Returns the optimised image in WebP format.
  */
 export default async function handler(
     req: NextApiRequest,
@@ -30,8 +30,8 @@ export default async function handler(
         res.setHeader('Content-Type', 'image/webp');
         res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
         res.send(trimmedBuffer);
-    } catch (error) {
-        console.error('[image-proxy] Error:', error);
+    } catch (err) {
+        console.error('[image-proxy] Error:', err);
         res.status(500).json({ error: 'Failed to process image' });
     }
 }

@@ -4,14 +4,14 @@ import Link from 'next/link';
 import styles from './BackButton.module.scss';
 
 /**
- * Botón de navegación para volver a la página principal.
+ * Navigation button to return to the homepage.
  */
 export default function BackHomeButton() {
     return (
-        <Link href="/" className={styles.back}>
+        <Link href="/" className={styles.back} aria-label="Go back to home">
             <Image
                 src="/back-icon.svg"
-                alt="Back"
+                alt=""
                 width={16}
                 height={16}
                 className={styles.icon}
