@@ -12,6 +12,7 @@ import PhoneStorageSelector from '@/components/PhoneDetail/PhoneStorageSelector/
 import PhoneSpecifications from '@/components/PhoneSpecifications/PhoneSpecifications';
 import BackHomeButton from '@/components/shared/BackButton/BackButton';
 import PhoneCardList from '@/components/shared/PhoneCard/PhoneCardList/PhoneCardList';
+import SeoHead from '@/components/shared/SeoHead/SeoHead';
 import { AppDispatch } from '@/redux/config/store';
 import { addToCart } from '@/redux/slices/cartSlice';
 import { getPhoneById } from '@/services/phoneService';
@@ -19,6 +20,9 @@ import { PhoneDetail } from '@/types/phone/phone-detail.type';
 
 const DEFAULT_IMAGE = '/default-phone-card.jpg';
 
+/**
+ * Displays the detailed information of a specific phone.
+ */
 export default function PhoneDetailPage() {
     const router = useRouter();
     const { id } = router.query;
@@ -68,7 +72,9 @@ export default function PhoneDetailPage() {
             <div className={styles['phone-detail__loader']}>
                 <div className={styles['phone-detail__loader-spinner']}>
                     <ClipLoader size={40} color="#333333" speedMultiplier={1} />
-                    <span>Loading phone details...</span>
+                    <span role="status" aria-live="polite">
+                        Loading phone details...
+                    </span>
                 </div>
             </div>
         );
@@ -84,13 +90,10 @@ export default function PhoneDetailPage() {
 
     return (
         <main className={styles['phone-detail']}>
-            <Head>
-                <title>{`${phone.brand} ${phone.name} - Phone Details`}</title>
-                <meta
-                    name="description"
-                    content={`${phone.brand} ${phone.name}: features, prices and options available.`}
-                />
-            </Head>
+            <SeoHead
+                title={`${phone.brand} ${phone.name} - Phone Details`}
+                description={`${phone.brand} ${phone.name}: features, prices and options available.`}
+            />
 
             <BackHomeButton />
 
@@ -109,9 +112,9 @@ export default function PhoneDetailPage() {
                     </section>
 
                     <section className={styles['phone-detail__info']}>
-                        <h2 className={styles['phone-detail__title']}>
+                        <h1 className={styles['phone-detail__title']}>
                             {phone.name}
-                        </h2>
+                        </h1>
 
                         <p className={styles['phone-detail__price']}>
                             {currentPrice} eur
@@ -130,9 +133,9 @@ export default function PhoneDetailPage() {
                         />
 
                         <button
-                            onClick={handleAddToCart}
-                            disabled={!selectedColor || !selectedStorage}
+                            aria-label="Add to cart"
                             className={styles['phone-detail__add-to-cart']}
+                            onClick={handleAddToCart}
                         >
                             Add to Cart
                         </button>
@@ -142,9 +145,9 @@ export default function PhoneDetailPage() {
                 <PhoneSpecifications phone={phone} />
 
                 <section className={styles['phone-detail__similar']}>
-                    <h3 className={styles['phone-detail__similar-title']}>
+                    <h2 className={styles['phone-detail__similar-title']}>
                         Similar items
-                    </h3>
+                    </h2>
                     <PhoneCardList phones={phone.similarProducts} />
                 </section>
             </div>

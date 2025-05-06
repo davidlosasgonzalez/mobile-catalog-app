@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +6,7 @@ import styles from './CartPage.module.scss';
 
 import CartItem from '@/components/CartItem/CartItem';
 import BackHomeButton from '@/components/shared/BackButton/BackButton';
+import SeoHead from '@/components/shared/SeoHead/SeoHead';
 import { AppDispatch, RootState } from '@/redux/config/store';
 import {
     decreaseQuantity,
@@ -15,7 +15,7 @@ import {
 } from '@/redux/slices/cartSlice';
 
 /**
- * Página del carrito de compras.
+ * Shopping cart page.
  */
 export default function CartPage() {
     const [hasMounted, setHasMounted] = useState(false);
@@ -44,23 +44,20 @@ export default function CartPage() {
         0,
     );
 
-    if (!hasMounted) {
-        return null;
-    }
+    if (!hasMounted) return null;
 
     return (
         <main className={styles.cart}>
-            <Head>
-                <title>Shopping Cart</title>
-                <meta
-                    name="description"
-                    content="Check the selected phones in your shopping cart."
-                />
-            </Head>
+            <SeoHead
+                title="Shopping Cart | Mobile Catalog"
+                description="Check the selected phones in your shopping cart."
+            />
 
             <BackHomeButton />
 
-            <h2 className={styles.cart__title}>Cart ({items.length})</h2>
+            <h1 className={styles.cart__title}>
+                Cart <span aria-live="polite">({items.length})</span>{' '}
+            </h1>
 
             {items.length === 0 ? (
                 <p className={styles.cart__empty}>Your cart is empty.</p>

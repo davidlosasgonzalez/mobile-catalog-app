@@ -16,10 +16,10 @@ const initialCartState: CartState = {
 };
 
 /**
- * Crea una store de Redux configurada para pruebas unitarias.
+ * Creates a Redux store configured for unit testing.
  *
- * @param preloadedState - Estado parcial inicial para pruebas.
- * @returns Store lista para testear lógica Redux.
+ * @param preloadedState - Initial partial state for testing
+ * @returns Store ready for testing Redux logic
  */
 export const createTestStore = (
     preloadedState: Partial<{

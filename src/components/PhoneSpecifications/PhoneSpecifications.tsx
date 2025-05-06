@@ -3,93 +3,45 @@ import styles from './PhoneSpecifications.module.scss';
 import { PhoneDetailProps } from '@/interfaces/phone/phone-details-props.interdace';
 
 /**
- * Muestra una tabla con las especificaciones técnicas del teléfono.
+ * Displays a table with the phone's technical specifications.
  *
- * @param phone - Objeto que contiene los datos del teléfono y sus especificaciones detalladas
+ * @param phone - The phone object containing detailed specifications
  */
 export default function PhoneSpecifications({ phone }: PhoneDetailProps) {
     return (
-        <section className={styles['specs']}>
-            <h3 className={styles['specs__title']}>Specifications</h3>
+        <section className={styles['specs']} aria-labelledby="specs-heading">
+            <h3 id="specs-heading" className={styles['specs__title']}>
+                Specifications
+            </h3>
 
             <table className={styles['specs__table']}>
+                <caption className="sr-only">
+                    Technical specifications of the phone
+                </caption>
                 <tbody>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>Brand</th>
-                        <td className={styles['specs__cell']}>{phone.brand}</td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>Model</th>
-                        <td className={styles['specs__cell']}>{phone.name}</td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>
-                            Description
-                        </th>
-                        <td className={styles['specs__cell']}>
-                            {phone.description}
-                        </td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>Screen</th>
-                        <td className={styles['specs__cell']}>
-                            {phone.specs.screen}
-                        </td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>
-                            Resolution
-                        </th>
-                        <td className={styles['specs__cell']}>
-                            {phone.specs.resolution}
-                        </td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>
-                            Processor
-                        </th>
-                        <td className={styles['specs__cell']}>
-                            {phone.specs.processor}
-                        </td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>
-                            Main Camera
-                        </th>
-                        <td className={styles['specs__cell']}>
-                            {phone.specs.mainCamera}
-                        </td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>
-                            Selfie Camera
-                        </th>
-                        <td className={styles['specs__cell']}>
-                            {phone.specs.selfieCamera}
-                        </td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>
-                            Battery
-                        </th>
-                        <td className={styles['specs__cell']}>
-                            {phone.specs.battery}
-                        </td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>OS</th>
-                        <td className={styles['specs__cell']}>
-                            {phone.specs.os}
-                        </td>
-                    </tr>
-                    <tr className={styles['specs__row']}>
-                        <th className={styles['specs__cell--label']}>
-                            Refresh Rate
-                        </th>
-                        <td className={styles['specs__cell']}>
-                            {phone.specs.screenRefreshRate}
-                        </td>
-                    </tr>
+                    {[
+                        ['Brand', phone.brand],
+                        ['Model', phone.name],
+                        ['Description', phone.description],
+                        ['Screen', phone.specs.screen],
+                        ['Resolution', phone.specs.resolution],
+                        ['Processor', phone.specs.processor],
+                        ['Main Camera', phone.specs.mainCamera],
+                        ['Selfie Camera', phone.specs.selfieCamera],
+                        ['Battery', phone.specs.battery],
+                        ['OS', phone.specs.os],
+                        ['Refresh Rate', phone.specs.screenRefreshRate],
+                    ].map(([label, value]) => (
+                        <tr key={label} className={styles['specs__row']}>
+                            <th
+                                scope="row"
+                                className={styles['specs__cell--label']}
+                            >
+                                {label}
+                            </th>
+                            <td className={styles['specs__cell']}>{value}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </section>

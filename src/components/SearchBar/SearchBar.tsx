@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { fetchPhones } from '@/redux/slices/phoneSlice';
 
 /**
- * Barra de búsqueda que permite filtrar teléfonos por nombre o marca.
+ * Search bar component to filter phones by name or brand.
  */
 export default function SearchBar() {
     const dispatch = useAppDispatch();
@@ -54,14 +54,20 @@ export default function SearchBar() {
             onSubmit={(e) => e.preventDefault()}
             className={styles['search-bar']}
         >
+            <label htmlFor="search-input" className="sr-only">
+                Search smartphones
+            </label>
+
             <div className={styles['search-bar__input-group']}>
                 <input
+                    id="search-input"
                     type="text"
                     placeholder="Search for a smartphone..."
                     value={query}
                     onChange={handleChange}
                     className={styles['search-bar__input']}
                 />
+
                 {query && (
                     <button
                         type="button"
@@ -79,7 +85,10 @@ export default function SearchBar() {
                 )}
             </div>
 
-            <p className={styles['search-bar__result-count']}>
+            <p
+                className={styles['search-bar__result-count']}
+                aria-live="polite"
+            >
                 {totalResults} result{totalResults !== 1 && 's'}
             </p>
         </form>

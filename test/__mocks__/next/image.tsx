@@ -1,12 +1,12 @@
 import { ImgHTMLAttributes } from 'react';
 
 /**
- * Mock simplificado de next/image para entorno de test. Este mock permite que
- * las pruebas se ejecuten correctamente reemplazando <Image> por un <img> estándar.
+ * Simplified `next/image mock` for testing environments. This mock allows tests to run correctly by replacing <Image> with a standard <img>.
  *
- * @param props - Atributos de una imagen estándar HTML.
- * @returns Un elemento <img> con las propiedades proporcionadas.
+ * @param props - Attributes of a standard HTML image
+ * @returns An <img> element with the provided properties
  */
+
 const NextImage = (props: ImgHTMLAttributes<HTMLImageElement>) => {
     return <img {...props} />;
 };

@@ -5,17 +5,17 @@ import { mockPhone } from '../../../test/__mocks__/phone.mock';
 import PhoneCardList from '../shared/PhoneCard/PhoneCardList/PhoneCardList';
 
 describe('PhoneCardList', () => {
-    it('muestra un mensaje si no hay teléfonos', () => {
+    it('displays a message if no phones are available', () => {
         render(<PhoneCardList phones={[]} />);
         expect(screen.getByText(/no phones available/i)).toBeInTheDocument();
     });
 
-    it('renderiza una lista de tarjetas de teléfono', () => {
+    it('renders a list of phone cards', () => {
         render(
             <PhoneCardList phones={[mockPhone, { ...mockPhone, id: '2' }]} />,
         );
-        const images = screen.getAllByRole('img');
 
+        const images = screen.getAllByRole('img');
         expect(images).toHaveLength(2);
     });
 });

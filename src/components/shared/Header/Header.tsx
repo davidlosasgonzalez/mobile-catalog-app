@@ -8,7 +8,7 @@ import styles from './Header.module.scss';
 import { RootState } from '@/redux/config/store';
 
 /**
- * Encabezado principal de la aplicación.
+ * Main application header.
  */
 export default function Header() {
     const totalItems = useSelector((state: RootState) =>
@@ -24,14 +24,16 @@ export default function Header() {
     return (
         <header className={styles.header}>
             <div className={styles.logoWrapper}>
-                <Image
-                    src="/logo-app.png"
-                    alt="Mobile Catalog Logo"
-                    fill
-                    sizes="80px"
-                    className={styles.logo}
-                    priority
-                />
+                <Link href="/" aria-label="Go to homepage">
+                    <Image
+                        src="/logo-app.png"
+                        alt="Mobile Catalog Logo"
+                        fill
+                        sizes="80px"
+                        className={styles.logo}
+                        priority
+                    />
+                </Link>
             </div>
 
             <Link
@@ -47,7 +49,9 @@ export default function Header() {
                     className={styles.cartIcon}
                 />
                 {hasMounted && totalItems > 0 && (
-                    <span className={styles.badge}>{totalItems}</span>
+                    <span className={styles.badge} aria-live="polite">
+                        {totalItems}
+                    </span>
                 )}
             </Link>
         </header>

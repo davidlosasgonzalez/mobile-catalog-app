@@ -5,12 +5,12 @@ import styles from './CartItem.module.scss';
 import { ICartItemProps } from '@/interfaces/card/cart-item-props.interface';
 
 /**
- * Componente visual para representar un producto dentro del carrito.
+ * Visual component representing a product inside the shopping cart.
  *
- * @param item - Datos del producto en el carrito (marca, modelo, cantidad, etc.)
- * @param onRemove - Función que se ejecuta al eliminar el producto del carrito
- * @param onIncrease - Función que se ejecuta al aumentar la cantidad del producto
- * @param onDecrease - Función que se ejecuta al disminuir la cantidad del producto
+ * @param item - Cart product details (brand, model, quantity, etc.)
+ * @param onRemove - Function triggered when removing the product
+ * @param onIncrease - Function triggered when increasing quantity
+ * @param onDecrease - Function triggered when decreasing quantity
  */
 export default function CartItem({
     item,
@@ -45,6 +45,7 @@ export default function CartItem({
                         onClick={onDecrease}
                         disabled={item.quantity <= 1}
                         className={styles['cart-item__button']}
+                        aria-label={`Decrease quantity of ${item.name}`}
                     >
                         -
                     </button>
@@ -54,6 +55,7 @@ export default function CartItem({
                     <button
                         onClick={onIncrease}
                         className={styles['cart-item__button']}
+                        aria-label={`Increase quantity of ${item.name}`}
                     >
                         +
                     </button>
@@ -61,7 +63,7 @@ export default function CartItem({
 
                 <button
                     onClick={onRemove}
-                    aria-label="Remove"
+                    aria-label={`Remove ${item.name} from cart`}
                     className={styles['cart-item__remove']}
                 >
                     Remove

@@ -3,11 +3,11 @@ import styles from './PhoneStorageSelector.module.scss';
 import { IPhoneStorageSelectorProps } from '@/interfaces/phone/phone-storage-selector-props.interface';
 
 /**
- * Selector visual de opciones de almacenamiento para un teléfono.
+ * Visual selector of storage options for a phone.
  *
- * @param options - Lista de opciones de almacenamiento disponibles (por ejemplo, '128 GB', '256 GB')
- * @param selected - Capacidad actualmente seleccionada
- * @param onSelect - Función que se ejecuta al seleccionar una nueva capacidad
+ * @param options - List of available storage options (e.g. "128 GB", "256 GB")
+ * @param selected - Capacity currently selected
+ * @param onSelect - Function to be executed when selecting a new capacity
  */
 export default function PhoneStorageSelector({
     options,
@@ -15,8 +15,14 @@ export default function PhoneStorageSelector({
     onSelect,
 }: IPhoneStorageSelectorProps) {
     return (
-        <section className={styles['storage-selector']}>
-            <h3 className={styles['storage-selector__title']}>
+        <section
+            className={styles['storage-selector']}
+            aria-labelledby="storage-heading"
+        >
+            <h3
+                id="storage-heading"
+                className={styles['storage-selector__title']}
+            >
                 Storage: How much space do you need?
             </h3>
 
@@ -31,6 +37,7 @@ export default function PhoneStorageSelector({
                                 ? styles['storage-selector__option--selected']
                                 : ''
                         }`}
+                        aria-pressed={selected === opt.capacity}
                     >
                         {opt.capacity}
                     </button>

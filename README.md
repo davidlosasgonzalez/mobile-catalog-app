@@ -1,8 +1,8 @@
 # 📱 Phone Catalog Challenge
 
-Aplicación web enfocada en la visualización, búsqueda y gestión de un catálogo de teléfonos móviles. Estructura clara, arquitectura escalable, buenas prácticas y cobertura funcional completa.
+Aplicación web enfocada en la visualización, búsqueda y gestión de un catálogo de teléfonos móviles. Estructura clara, arquitectura escalable, buenas prácticas, accesibilidad mejorada y optimización SEO básica.
 
-- [Deploy en Vercel](https://mobile-catalog-app-5lz2.vercel.app/)
+- [Deploy en Vercel](https://mobile-catalog-app-zik9.vercel.app/)
 
 ## 🛠️ Tecnologías utilizadas
 
@@ -14,6 +14,8 @@ Aplicación web enfocada en la visualización, búsqueda y gestión de un catál
 - **lodash.debounce** — Optimización de búsquedas en tiempo real.
 - **react-hot-toast** — Notificaciones visuales.
 - **react-spinners** — Indicadores de carga accesibles.
+- **redux-persist** — Persistencia de estado global con `localStorage`.
+- **Next.js Image & Head** — Optimización SEO y de rendimiento.
 
 ### Testing
 
@@ -147,12 +149,14 @@ Algunas respuestas de la API incluían productos repetidos por `id`, lo que gene
 - Uso de `<Image>` de Next.js con `priority` en la vista de detalle para mejorar el LCP.
 - Componentes desacoplados y optimizados (evita renderizados innecesarios).
 - Debounce en el buscador para minimizar llamadas a la API.
+- Optimización SEO básica mediante etiquetas `<title>` y `<meta>` dinámicas.
 
 ### 5️⃣ Accesibilidad
 
-- Botones con `aria-label` y `title` donde corresponde.
-- Navegación por teclado y buen contraste de colores.
-- `alt` en imágenes e iconos informativos.
+- Botones con `aria-label`, `title` y roles accesibles.
+- Navegación por teclado, enfoque visible y contraste adecuado.
+- `alt` descriptivo en imágenes de productos y elementos clave.
+- Carga visual accesible con `react-spinners`.
 
 ### 6️⃣ Escalabilidad futura
 

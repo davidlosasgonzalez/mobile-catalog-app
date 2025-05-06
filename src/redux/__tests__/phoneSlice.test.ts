@@ -11,7 +11,7 @@ vi.mock('@/services/phoneService', () => ({
 }));
 
 describe('phoneSlice', () => {
-    it('cambia el estado correctamente al hacer fetchPhones()', async () => {
+    it('updates the state correctly when fetchPhones() is dispatched', async () => {
         (getPhones as any).mockResolvedValue([mockPhone]);
 
         const store = createTestStore();

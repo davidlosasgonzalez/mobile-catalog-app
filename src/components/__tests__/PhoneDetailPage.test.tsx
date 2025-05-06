@@ -1,6 +1,6 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { Mock, describe, it, beforeEach, expect } from 'vitest';
+import { Mock, describe, it, beforeEach, expect, vi } from 'vitest';
 
 import { mockPhoneDetail } from '../../../test/__mocks__/phone-detail.mock';
 
@@ -34,22 +34,22 @@ describe('PhoneDetailPage', () => {
         routerPush.mockReset();
     });
 
-    it('muestra loader mientras se carga', async () => {
+    it('displays a loading message while fetching phone data', async () => {
         render(
             <Provider store={store}>
                 <PhoneDetailPage />
             </Provider>,
         );
 
-        expect(screen.getByText(/Loading phone details/i)).toBeInTheDocument();
+        expect(screen.getByText(/loading phone details/i)).toBeInTheDocument();
 
         await screen.findByRole('heading', {
-            level: 2,
-            name: /Galaxy S23/i,
+            level: 1,
+            name: /galaxy s23/i,
         });
     });
 
-    it('muestra los detalles del teléfono tras la carga', async () => {
+    it('renders phone details after loading', async () => {
         render(
             <Provider store={store}>
                 <PhoneDetailPage />
@@ -57,8 +57,8 @@ describe('PhoneDetailPage', () => {
         );
 
         await screen.findByRole('heading', {
-            level: 2,
-            name: /Galaxy S23/i,
+            level: 1,
+            name: /galaxy s23/i,
         });
 
         expect(screen.getByText('799 eur')).toBeInTheDocument();
@@ -69,11 +69,11 @@ describe('PhoneDetailPage', () => {
             screen.getByText('Color: Pick your favorite'),
         ).toBeInTheDocument();
         expect(
-            screen.getByRole('button', { name: /Add to Cart/i }),
+            screen.getByRole('button', { name: /add to cart/i }),
         ).toBeEnabled();
     });
 
-    it('permite seleccionar almacenamiento y color, y añade al carrito', async () => {
+    it('allows selecting storage and color, and adds the phone to cart', async () => {
         render(
             <Provider store={store}>
                 <PhoneDetailPage />
@@ -81,20 +81,22 @@ describe('PhoneDetailPage', () => {
         );
 
         await screen.findByRole('heading', {
-            level: 2,
-            name: /Galaxy S23/i,
+            level: 1,
+            name: /galaxy s23/i,
         });
 
         const storageButton = screen.getByRole('button', { name: /128GB/i });
         fireEvent.click(storageButton);
         expect(storageButton.className).toMatch(/--selected/);
 
-        const colorButton = screen.getByRole('button', { name: /Negro/i });
+        const colorButton = screen.getByRole('button', { name: /negro/i });
         fireEvent.click(colorButton);
         expect(screen.getByText('Negro')).toBeInTheDocument();
 
-        const addButton = screen.getByRole('button', { name: /Add to Cart/i });
-        fireEvent.click(addButton);
+        const addToCartButton = screen.getByRole('button', {
+            name: /add to cart/i,
+        });
+        fireEvent.click(addToCartButton);
 
         await waitFor(() => {
             expect(routerPush).toHaveBeenCalledWith('/cart');

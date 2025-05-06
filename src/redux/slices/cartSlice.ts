@@ -7,7 +7,7 @@ import { CartState } from '@/types/cart/cart-state.type';
 const STORAGE_KEY = 'cartState';
 
 /**
- * Recupera el estado del carrito desde localStorage.
+ * Retrieves the status of the cart from localStorage.
  */
 const loadCartFromStorage = (): CartState => {
     try {
@@ -20,13 +20,13 @@ const loadCartFromStorage = (): CartState => {
 };
 
 /**
- * Guarda el estado actual del carrito en localStorage.
+ * Stores the current status of the cart in localStorage.
  */
 const saveCartToStorage = (state: CartState) => {
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {
-        // fail silently
+        // Fail silently.
     }
 };
 

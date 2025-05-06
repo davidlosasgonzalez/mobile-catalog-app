@@ -14,7 +14,7 @@ const basePhone: Phone = {
 };
 
 describe('PhoneCardItem', () => {
-    it('renderiza nombre, marca, precio e imagen del teléfono', () => {
+    it('renders the phone name, brand, price, and image', () => {
         render(<PhoneCardItem {...basePhone} />);
 
         expect(
@@ -28,7 +28,7 @@ describe('PhoneCardItem', () => {
         expect(screen.getByText(/799 EUR/i)).toBeInTheDocument();
     });
 
-    it('usa imagen por defecto si imageUrl está vacía', () => {
+    it('uses the default image if imageUrl is empty', () => {
         render(<PhoneCardItem {...{ ...basePhone, imageUrl: '' }} />);
 
         const img = screen.getByRole('img') as HTMLImageElement;

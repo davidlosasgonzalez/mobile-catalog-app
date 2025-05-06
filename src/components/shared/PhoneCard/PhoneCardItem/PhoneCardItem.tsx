@@ -3,20 +3,12 @@ import Link from 'next/link';
 
 import styles from './PhoneCardItem.module.scss';
 
-import { Phone } from '@/types/phone/phone.type';
 import { PhoneCardItemProps } from '@/types/phone/phone-card-item-props.type';
 
 const DEFAULT_IMAGE = '/default-phone-card.jpg';
 
 /**
- * Muestra una tarjeta con la información básica de un teléfono.
- *
- * @param id - ID único del teléfono
- * @param brand - Marca del teléfono
- * @param name - Nombre o modelo del teléfono
- * @param basePrice - Precio base del dispositivo
- * @param imageUrl - URL de la imagen del teléfono (se usa una por defecto si está vacía)
- * @param priority - Si se debe priorizar la carga de la imagen (mejora el LCP si es la primera imagen visible)
+ * Displays a card with basic phone information.
  */
 export default function PhoneCardItem({
     id,
@@ -41,10 +33,12 @@ export default function PhoneCardItem({
                             : { loading: 'lazy' })}
                     />
                 </div>
+
                 <div className={styles['phone-card__content']}>
                     <p className={styles['phone-card__brand']}>{brand}</p>
+
                     <div className={styles['phone-card__details']}>
-                        <p>{name}</p>
+                        <h3 className={styles['phone-card__name']}>{name}</h3>
                         <p>{basePrice} EUR</p>
                     </div>
                 </div>
